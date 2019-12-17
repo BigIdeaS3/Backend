@@ -7,26 +7,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="domain" />
+        <module name="dal" />
         <module name="logic" />
         <module name="persistence" />
-        <module name="DAL" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="DAL" target="11" />
+      <module name="dal" target="11" />
       <module name="domain" target="11" />
       <module name="logic" target="11" />
       <module name="persistence" target="11" />
-      <module name="snakemp" target="11" />
+      <module name="snakebackend" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="DAL" options="-parameters" />
+      <module name="dal" options="-parameters" />
       <module name="domain" options="-parameters" />
       <module name="logic" options="-parameters" />
       <module name="persistence" options="-parameters" />
-      <module name="snakemp" options="-parameters" />
+      <module name="snakebackend" options="-parameters" />
     </option>
   </component>
 </project>
