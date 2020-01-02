@@ -1,6 +1,4 @@
 package com.rene.models;
-
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +21,6 @@ public class Player {
     public Long id;
     public String username;
     public String password;
-    public Long points = 0L;
     @Nullable
     public String email;
 }
