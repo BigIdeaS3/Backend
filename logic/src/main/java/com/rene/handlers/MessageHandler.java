@@ -13,6 +13,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.stream.Location;
+
 @Component
 public class MessageHandler {
 
@@ -51,6 +53,10 @@ public class MessageHandler {
     public WebsocketGameMessage handleGameMessage(int gameId, WebsocketGameMessage msg) {
             Game game = gameService.getGame(gameId);
             switch (msg.getType()) {
+            case DRAW:
+                    Location location = new Gson().fromJson(msg.getMessage().toString(),Location.class);
+                    System.out.println(msg.getMessage());
+                    return new WebsocketGameMessage(msg.getType(),game.addPoint(location));
             case LEAVE:
                 Player player = playerService.getPlayerByUserName(msg.getMessage().toString());
                 return new WebsocketGameMessage(GameMessageType.LEAVE, game.removePlayer(player));
