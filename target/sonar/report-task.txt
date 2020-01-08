@@ -1,0 +1,6 @@
+projectKey=backendSnake
+serverUrl=http://localhost:9090
+serverVersion=8.1.0.31237
+dashboardUrl=http://localhost:9090/dashboard?id=backendSnake
+ceTaskId=AW-Es3FVR1PdDRCCGB0e
+ceTaskUrl=http://localhost:9090/api/ce/task?id=AW-Es3FVR1PdDRCCGB0e

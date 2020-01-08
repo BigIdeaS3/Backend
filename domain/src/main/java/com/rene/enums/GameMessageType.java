@@ -7,3 +7,4 @@ public enum GameMessageType {
     STARTDRAWING,
     DRAW
 }
+
