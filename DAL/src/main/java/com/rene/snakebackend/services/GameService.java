@@ -22,8 +22,8 @@ public class GameService {
         return games;
     }
 
-    public int createGame(Player player) {
-        games.add(new Game(player));
+    public int createGame() {
+        games.add(new Game());
         return games.size()-1;
     }
 

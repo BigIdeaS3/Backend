@@ -9,9 +9,14 @@ public class Game {
     @Getter
     private List<Player> connectedPlayers = new ArrayList<>();
 
-    public Game(Player player) {
-        this.connectedPlayers.add(player);
+//    public Game(Player player) {
+//        this.connectedPlayers.add(player);
+//    }
+
+    public Game() {
+
     }
+
 
     public List<Player> addPlayer(Player player) {
         if (!connectedPlayers.contains(player)) {

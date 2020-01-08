@@ -5,6 +5,7 @@ public enum GameMessageType {
     LEAVE,
     JOIN,
     STARTDRAWING,
-    DRAW
+    DRAW,
+    GETALLPLAYERS
 }
 
