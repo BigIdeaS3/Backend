@@ -1,0 +1,8 @@
+com\rene\models\Player.class
+com\rene\models\WebsocketLobbyMessage.class
+com\rene\enums\GameMessageType.class
+com\rene\interfaces\CRUD.class
+com\rene\models\Game.class
+com\rene\models\WebsocketGameMessage.class
+com\rene\enums\LobbyMessageType.class
+com\rene\interfaces\RESTCRUD.class

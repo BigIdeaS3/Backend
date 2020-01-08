@@ -13,11 +13,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="DAL" target="11" />
-      <module name="domain" target="11" />
-      <module name="logic" target="11" />
-      <module name="persistence" target="11" />
-      <module name="snakebackend" target="11" />
+      <module name="DAL" target="1.8" />
+      <module name="domain" target="1.8" />
+      <module name="logic" target="1.8" />
+      <module name="persistence" target="1.8" />
+      <module name="snakebackend" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

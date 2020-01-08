@@ -11,5 +11,7 @@
 
     <artifactId>domain</artifactId>
 
+    <dependencies>
+    </dependencies>
 
 </project>
