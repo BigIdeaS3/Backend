@@ -53,7 +53,7 @@ public class PlayerController implements RESTCRUD<Player,Long> {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody Player entity) {
-        return new ResponseEntity<>(handler.login(entity.username,entity.password), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(handler.login(entity.getUsername(),entity.getPassword()), HttpStatus.valueOf(200));
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)

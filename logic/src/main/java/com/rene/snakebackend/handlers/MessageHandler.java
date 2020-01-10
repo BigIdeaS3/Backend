@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -51,28 +52,20 @@ public class MessageHandler {
 
     public WebsocketGameMessage handleGameMessage(int gameId, WebsocketGameMessage msg) {
             Game game = gameService.getGame(gameId);
+            Gson gson =  new Gson();
             switch (msg.getType()) {
             case DRAW:
-                List<Location> snake = new Gson().fromJson(msg.getMessage().toString(), new TypeToken<List<Location>>(){}.getType());
-                System.out.println(snake);
-                return new WebsocketGameMessage(GameMessageType.DRAW, snake);
-                    //Location location = new Gson().fromJson(msg.getMessage().toString(),Location.class);
-                    //System.out.println(msg.getMessage());
-                    //return new WebsocketGameMessage(msg.getType(),game.addPoint(location));
-            case LEAVE:
-                Player player = playerService.getPlayerByUserName(msg.getMessage().toString());
-                return new WebsocketGameMessage(GameMessageType.LEAVE, game.removePlayer(player));
-
+                SnakePlayer player = gson.fromJson(msg.getMessage().toString(), SnakePlayer.class);
+                return new WebsocketGameMessage(GameMessageType.DRAW, game.updatePlayerLocation(player));
             case STARTGAME:
-                player = playerService.getPlayerByUserName(msg.getMessage().toString());
-                return new WebsocketGameMessage(GameMessageType.STARTGAME,component.startGame(game,player));
-
+                player = gson.fromJson(msg.getMessage().toString(), SnakePlayer.class);
+                game.addPlayer(player);
+                return new WebsocketGameMessage(GameMessageType.STARTGAME, game.getConnectedPlayers());
             case JOIN:
-                player = playerService.getPlayerByUserName(msg.getMessage().toString());
-                return new WebsocketGameMessage(GameMessageType.JOIN, game.addPlayer(player));
-
-                case GETALLPLAYERS:
-                    return new WebsocketGameMessage(GameMessageType.GETALLPLAYERS, game.getConnectedPlayers());
+                SnakePlayer p = new SnakePlayer(playerService.getPlayerByUserName(msg.getMessage().toString()),new ArrayList<>());
+                return new WebsocketGameMessage(GameMessageType.JOIN, game.findByName(p.getPlayer().getUsername()));
+            case GETALLPLAYERS:
+                return new WebsocketGameMessage(GameMessageType.GETALLPLAYERS, game.getConnectedPlayers());
 
         }
         throw new UnsupportedOperationException();
