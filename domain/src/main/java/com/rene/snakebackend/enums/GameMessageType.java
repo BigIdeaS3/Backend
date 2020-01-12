@@ -6,6 +6,8 @@ public enum GameMessageType {
     JOIN,
     STARTDRAWING,
     DRAW,
-    GETALLPLAYERS
+    GETALLPLAYERS,
+    SETFOOD,
+    GETFOOD
 }
 

@@ -1,6 +1,7 @@
 package com.rene.snakebackend.models;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.List;
 public class Game {
     @Getter
     private List<SnakePlayer> connectedPlayers = new ArrayList<>();
+    @Getter
+    @Setter
+    private Location food;
 
 //    public Game(Player player) {
 //        this.connectedPlayers.add(player);
@@ -19,10 +23,18 @@ public class Game {
 
 
     public List<SnakePlayer> addPlayer(SnakePlayer player) {
-        if (!connectedPlayers.contains(player)) {
+        boolean containsPlayer = false;
+        for (SnakePlayer snakePlayer : connectedPlayers) {
+            if (snakePlayer.getPlayer().equals(player.getPlayer())) {
+                containsPlayer = true;
+                break;
+            }
+        }
+        if (!containsPlayer) {
             connectedPlayers.add(player);
             return connectedPlayers;
-        } else return null;
+        }
+        else return null;
     }
 
     public List<SnakePlayer> removePlayer(SnakePlayer player) {
