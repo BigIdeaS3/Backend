@@ -15,13 +15,7 @@ public class Game implements DTO {
     @Setter
     private Location food;
 
-//    public Game(Player player) {
-//        this.connectedPlayers.add(player);
-//    }
-
-    public Game() {
-
-    }
+    public Game() {}
 
     public List<SnakePlayer> addPlayer(SnakePlayer player) {
         boolean containsPlayer = false;

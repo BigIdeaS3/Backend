@@ -8,14 +8,15 @@ import com.rene.snakebackend.models.Location;
 
 public class GetFood implements Command {
     private Controller controller;
+    private Object Location;
 
     public GetFood(Controller controller) {
         this.controller = controller;
     }
 
     @Override
-    public DTO execute(Game game, DTO message) {
-        game.getFood();
-        return null;
+    public Object execute(Game game, DTO message) {
+        new GetFood((Controller) Location);
+        return Location;
     }
 }

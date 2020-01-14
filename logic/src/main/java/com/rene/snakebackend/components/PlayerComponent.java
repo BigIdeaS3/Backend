@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlayerComponent implements CRUD<Player,Long> {
 
-
     @Setter
     private PlayerService service;
 

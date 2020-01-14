@@ -89,8 +89,8 @@ public class MessageHandler implements com.rene.snakebackend.interfaces.MessageH
 //                    SnakePlayer p = new SnakePlayer(playerService.getPlayerByUserName(msg.getMessage().toString()),
 //                            Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0)));
 //                    return new WebsocketGameMessage(GameMessageType.JOIN, game.addPlayer(p));
-////                case GETALLPLAYERS:
-////                    return new WebsocketGameMessage(GameMessageType.GETALLPLAYERS, game.getConnectedPlayers());
+//                case GETALLPLAYERS:
+//                    return new WebsocketGameMessage(GameMessageType.GETALLPLAYERS, game.getConnectedPlayers());
 //                case SETFOOD:
 //                    Location food = gson.fromJson(msg.getMessage().toString(), Location.class);
 //                    game.setFood(food);
@@ -120,17 +120,19 @@ public class MessageHandler implements com.rene.snakebackend.interfaces.MessageH
 
         switch (type) {
             case DRAW:
-                return gson.fromJson(dtoMessage, Location.class);
+                return gson.fromJson(dtoMessage, SnakePlayer.class);
             case JOIN:
                 return new SnakePlayer(playerService.getPlayerByUserName(dtoMessage),
                             Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0)));
             case GETALLPLAYERS:
-
             case STARTGAME:
                 return null;
-            case GETFOOD:
             case SETFOOD:
-                
+                Location food = gson.fromJson(dtoMessage, Location.class);
+                return food;
+            case GETFOOD:
+
+
         }
 
     return null;
