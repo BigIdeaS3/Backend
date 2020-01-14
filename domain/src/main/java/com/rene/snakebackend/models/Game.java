@@ -1,12 +1,14 @@
 package com.rene.snakebackend.models;
 
+import com.rene.snakebackend.interfaces.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Game {
+public class Game implements DTO {
     @Getter
     private List<SnakePlayer> connectedPlayers = new ArrayList<>();
     @Getter
@@ -20,7 +22,6 @@ public class Game {
     public Game() {
 
     }
-
 
     public List<SnakePlayer> addPlayer(SnakePlayer player) {
         boolean containsPlayer = false;
@@ -62,7 +63,5 @@ public class Game {
         }
         return null;
     }
-
-
 
 }

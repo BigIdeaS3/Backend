@@ -10,11 +10,12 @@ import java.util.Random;
 
 @Component
 public class GameComponent {
-    public SnakePlayer startGame(Game game, Player player) {
-        List<SnakePlayer> players = game.getConnectedPlayers();
-        SnakePlayer p = players.get(new Random().nextInt(players.size()));
-//        game.setDrawer(p);
-        return p;
-    }
+//    Moved to models/game
+//    public SnakePlayer startGame(Game game, Player player) {
+//        List<SnakePlayer> players = game.getConnectedPlayers();
+//        SnakePlayer p = players.get(new Random().nextInt(players.size()));
+////        game.setDrawer(p);
+//        return p;
+//    }
 
 }
