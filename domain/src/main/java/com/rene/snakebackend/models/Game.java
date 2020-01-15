@@ -14,8 +14,6 @@ public class Game implements DTO {
     @Setter
     private Location food;
 
-    public Game() {}
-
     public List<SnakePlayer> addPlayer(SnakePlayer player) {
         boolean containsPlayer = false;
         for (SnakePlayer snakePlayer : connectedPlayers) {

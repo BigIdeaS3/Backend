@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 
 @Component
 public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces.MessageHandler {
 
-    private final HashMap<GameMessageType, Command> commandHashMap = new HashMap<>();
+    private final EnumMap<GameMessageType, Command> commandHashMap = new EnumMap<>(GameMessageType.class);
     private Gson gson = new Gson();
     private GameController game;
 
