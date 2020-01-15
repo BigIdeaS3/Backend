@@ -4,7 +4,6 @@ import com.rene.snakebackend.interfaces.Command;
 import com.rene.snakebackend.interfaces.Controller;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Game;
-import com.rene.snakebackend.models.Player;
 import com.rene.snakebackend.models.SnakePlayer;
 
 import java.util.List;
