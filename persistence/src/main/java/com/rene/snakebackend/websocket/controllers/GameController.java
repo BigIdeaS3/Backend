@@ -1,6 +1,6 @@
 package com.rene.snakebackend.websocket.controllers;
 
-import com.rene.snakebackend.handlers.MessageHandler;
+import com.rene.snakebackend.handlers.WebSocketMessageHandler;
 import com.rene.snakebackend.models.WebsocketGameMessage;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Controller;
 public class GameController {
 
     @Setter
-    private MessageHandler handler;
+    private WebSocketMessageHandler handler;
 
     @Autowired
-    public GameController(MessageHandler handler) {
+    public GameController(WebSocketMessageHandler handler) {
         this.handler = handler;
     }
 

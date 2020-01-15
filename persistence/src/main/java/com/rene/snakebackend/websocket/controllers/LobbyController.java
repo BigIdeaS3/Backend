@@ -1,6 +1,6 @@
 package com.rene.snakebackend.websocket.controllers;
 
-import com.rene.snakebackend.handlers.MessageHandler;
+import com.rene.snakebackend.handlers.WebSocketMessageHandler;
 import com.rene.snakebackend.models.WebsocketLobbyMessage;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Controller;
 public class LobbyController {
 
     @Setter
-    private final MessageHandler handler;
+    private final WebSocketMessageHandler handler;
 
     @Autowired
-    public LobbyController(MessageHandler handler) {
+    public LobbyController(WebSocketMessageHandler handler) {
         this.handler = handler;
     }
 

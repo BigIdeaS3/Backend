@@ -1,17 +1,14 @@
 package com.rene.snakebackend.commands;
 
 
+import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.interfaces.Command;
-import com.rene.snakebackend.interfaces.Controller;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Game;
 import com.rene.snakebackend.models.SnakePlayer;
 
 public class Draw implements Command {
-    private final Controller controller;
-
-    public Draw(Controller controller) {
-        this.controller = controller;
+    public Draw(GameController game) {
     }
 
     @Override

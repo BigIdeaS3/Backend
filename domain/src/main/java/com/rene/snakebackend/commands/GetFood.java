@@ -1,15 +1,13 @@
 package com.rene.snakebackend.commands;
 
+import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.interfaces.Command;
-import com.rene.snakebackend.interfaces.Controller;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Game;
 
 public class GetFood implements Command {
-    private Controller controller;
 
-    public GetFood(Controller controller) {
-        this.controller = controller;
+    public GetFood(GameController game) {
     }
 
     @Override

@@ -1,16 +1,14 @@
 package com.rene.snakebackend.commands;
 
+import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.interfaces.Command;
-import com.rene.snakebackend.interfaces.Controller;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Game;
 
 public class StartGame implements Command {
 
-    private Controller controller;
+    public StartGame(GameController game) {
 
-    public StartGame(Controller controller) {
-        this.controller = controller;
     }
 
     @Override

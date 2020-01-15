@@ -1,7 +1,7 @@
 package com.rene.snakebackend.commands;
 
+import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.interfaces.Command;
-import com.rene.snakebackend.interfaces.Controller;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Game;
 import com.rene.snakebackend.models.SnakePlayer;
@@ -9,10 +9,8 @@ import com.rene.snakebackend.models.SnakePlayer;
 import java.util.List;
 
 public class Join implements Command {
-    private Controller controller;
 
-    public Join(Controller controller) {
-        this.controller = controller;
+    public Join(GameController game) {
     }
 
     @Override
