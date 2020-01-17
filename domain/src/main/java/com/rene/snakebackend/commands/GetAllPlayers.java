@@ -10,9 +10,6 @@ import java.util.List;
 
 public class GetAllPlayers implements Command {
 
-    public GetAllPlayers(GameController game) {
-    }
-
     @Override
     public List<SnakePlayer> execute(Game game, DTO message) {
         return game.getConnectedPlayers();

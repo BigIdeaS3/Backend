@@ -7,10 +7,6 @@ import com.rene.snakebackend.models.Game;
 
 public class StartGame implements Command {
 
-    public StartGame(GameController game) {
-
-    }
-
     @Override
     public Object execute(Game game, DTO message) {
         return game.getConnectedPlayers();

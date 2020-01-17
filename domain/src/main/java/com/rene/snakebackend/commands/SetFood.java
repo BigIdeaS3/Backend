@@ -8,9 +8,6 @@ import com.rene.snakebackend.models.Location;
 
 public class SetFood implements Command {
 
-    public SetFood(GameController game) {
-    }
-
     @Override
     public DTO execute(Game game, DTO message) {
         game.setFood((Location)message);

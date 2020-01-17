@@ -8,9 +8,6 @@ import com.rene.snakebackend.models.Game;
 import com.rene.snakebackend.models.SnakePlayer;
 
 public class Draw implements Command {
-    public Draw(GameController game) {
-    }
-
     @Override
     public Object execute(Game game, DTO message) {
         return game.updatePlayerLocation((SnakePlayer)message);

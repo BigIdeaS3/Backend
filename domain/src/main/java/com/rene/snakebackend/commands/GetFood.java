@@ -7,9 +7,6 @@ import com.rene.snakebackend.models.Game;
 
 public class GetFood implements Command {
 
-    public GetFood(GameController game) {
-    }
-
     @Override
     public Object execute(Game game, DTO message) {
         return game.getFood();

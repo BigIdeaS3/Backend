@@ -2,45 +2,34 @@ package com.rene.snakebackend.commands;
 
 import com.rene.snakebackend.interfaces.Command;
 import com.rene.snakebackend.interfaces.DTO;
+import com.rene.snakebackend.models.Algorithm;
 import com.rene.snakebackend.models.Game;
 import com.rene.snakebackend.models.Location;
 import com.rene.snakebackend.models.SnakePlayer;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 public class PathFind implements Command {
+    private ExecutorService executorService = Executors.newFixedThreadPool(1);
     @Override
     public Object execute(Game game, DTO message) {
+        List<List<Location>> gameboard = new ArrayList<>(game.getGameboard());
+
         Location snakeHead = ((SnakePlayer) message).getSnake().get(0);
 
-        Location food = game.getFood();
+        Algorithm algorithm = new Algorithm(gameboard, snakeHead);
 
-        moveLocation(food, snakeHead);
+        FutureTask<Integer> futureTask = (FutureTask<Integer>) executorService.submit(algorithm);
 
-
-        return null;
-    }
-
-    public void moveLocation(Location food, Location newLoc) {
-        int xDiff = food.getX() - newLoc.getX();
-        int yDiff = food.getY() - newLoc.getY();
-
-//        TODO Collision detection - is tile free
-        
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            if (xDiff > 0) {
-                moveLocation(food, new Location(newLoc.getX()+1, newLoc.getY(), newLoc.getType()));
-                //Move positive one tile in x direction
-            } else {
-                moveLocation(food, new Location(newLoc.getX()-1, newLoc.getY(), newLoc.getType()));
-                //move negative one tile in x direction
-            }
-        } else {
-            if (yDiff > 0) {
-                moveLocation(food, new Location(newLoc.getX(), newLoc.getY()+1, newLoc.getType()));
-            } else {
-                moveLocation(food, new Location(newLoc.getX(), newLoc.getY()-1, newLoc.getType()));
-            }
+        try {
+            return futureTask.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 }

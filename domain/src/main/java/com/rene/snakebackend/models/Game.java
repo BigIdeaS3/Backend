@@ -12,6 +12,7 @@ public class Game implements DTO {
     @Getter
     private List<SnakePlayer> connectedPlayers = new ArrayList<>();
 
+    @Getter
     private List<List<Location>> gameboard;
 
     @Getter

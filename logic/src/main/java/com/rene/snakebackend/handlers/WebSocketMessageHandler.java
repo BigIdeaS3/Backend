@@ -6,6 +6,7 @@ import com.rene.snakebackend.components.GameComponent;
 import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.enums.GameMessageType;
 import com.rene.snakebackend.enums.LobbyMessageType;
+import com.rene.snakebackend.enums.TileType;
 import com.rene.snakebackend.interfaces.Command;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.*;
@@ -48,12 +49,13 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
     }
 
     private void registerCommands(){
-    register(GameMessageType.DRAW, new Draw(game));
-    register(GameMessageType.STARTGAME, new StartGame(game));
-    register(GameMessageType.GETALLPLAYERS, new GetAllPlayers(game));
-    register(GameMessageType.SETFOOD, new SetFood(game));
-    register(GameMessageType.GETFOOD, new GetFood(game));
-    register(GameMessageType.JOIN, new Join(game));
+    register(GameMessageType.DRAW, new Draw());
+    register(GameMessageType.STARTGAME, new StartGame());
+    register(GameMessageType.GETALLPLAYERS, new GetAllPlayers());
+    register(GameMessageType.SETFOOD, new SetFood());
+    register(GameMessageType.GETFOOD, new GetFood());
+    register(GameMessageType.JOIN, new Join());
+    register(GameMessageType.PATHFIND, new PathFind());
     }
 
     public WebsocketLobbyMessage handleLobbyMessage(WebsocketLobbyMessage msg) {
@@ -116,15 +118,15 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
             case DRAW:
                 return gson.fromJson(dtoMessage, SnakePlayer.class);
             case JOIN:
+            case PATHFIND:
                 return new SnakePlayer(playerService.getPlayerByUserName(dtoMessage),
-                            Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0)));
+                            Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0, TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY)));
             case GETALLPLAYERS:
             case STARTGAME:
+            case GETFOOD:
                 return null;
             case SETFOOD:
-                Location food = gson.fromJson(dtoMessage, Location.class);
-                return food;
-            case GETFOOD:
+                return gson.fromJson(dtoMessage, Location.class);
         }
     return null;
     }

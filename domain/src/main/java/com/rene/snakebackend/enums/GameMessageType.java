@@ -6,6 +6,7 @@ public enum GameMessageType {
     DRAW,
     GETALLPLAYERS,
     SETFOOD,
-    GETFOOD
+    GETFOOD,
+    PATHFIND
 }
 

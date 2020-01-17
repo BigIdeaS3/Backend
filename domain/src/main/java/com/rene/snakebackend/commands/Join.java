@@ -10,9 +10,6 @@ import java.util.List;
 
 public class Join implements Command {
 
-    public Join(GameController game) {
-    }
-
     @Override
     public List<SnakePlayer> execute(Game game, DTO message) {
         return game.addPlayer((SnakePlayer) message);
