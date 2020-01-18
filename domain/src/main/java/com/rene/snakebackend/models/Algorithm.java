@@ -33,6 +33,7 @@ public class Algorithm implements Callable<Integer> {
     private boolean traverse(Location loc) {
         if (!isValid(loc)) {
             return false;
+
         }
 
         if (isEnd(loc)) {
@@ -72,8 +73,7 @@ public class Algorithm implements Callable<Integer> {
     }
 
     private boolean isValid(Location loc) {
-        System.out.println(inRange(loc) && !isTried(loc) && isOpen(loc) );
-
+//        System.out.println(inRange(loc) && !isTried(loc) && isOpen(loc) );
         return inRange(loc) && !isTried(loc) && isOpen(loc);
     }
 
@@ -84,7 +84,6 @@ public class Algorithm implements Callable<Integer> {
     private boolean inWidth(int x) {
         return x > 0 && x < gameboard.get(0).size();
     }
-
 
     private boolean inHeight(int y) {
         return y > 0 && y < gameboard.size();

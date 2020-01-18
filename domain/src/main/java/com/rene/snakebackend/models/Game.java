@@ -52,7 +52,24 @@ public class Game implements DTO {
         return connectedPlayers;
     }
 
+    private void clearGameboard() {
+        for (List<Location> locations: gameboard) {
+            for (Location location: locations) {
+                location.setType(TileType.EMPTY);
+            }
+        }
+    }
+
     public List<SnakePlayer> updatePlayerLocation(SnakePlayer player) {
+
+        clearGameboard();
+        for (SnakePlayer snakePlayer : connectedPlayers) {
+            for (Location body : snakePlayer.getSnake()) {
+                gameboard.get(body.getY()).set(body.getX(),body);
+            }
+        }
+
+        gameboard.get(food.getY()).set(food.getX(),food);
 
         for (int i = 0; i < player.getSnake().size(); i++) {
             Location body = player.getSnake().get(i);
