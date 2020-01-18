@@ -1,5 +1,6 @@
 package componentTest;
 
+import com.rene.snakebackend.enums.TileType;
 import com.rene.snakebackend.models.Game;
 import com.rene.snakebackend.models.Location;
 import com.rene.snakebackend.models.Player;
@@ -15,9 +16,9 @@ public class GameTest {
     @BeforeEach
     public void setup(){
         game.addPlayer(new SnakePlayer(new Player("test","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
         game.addPlayer(new SnakePlayer(new Player("test2","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
         }
 
     @Test
@@ -26,7 +27,7 @@ public class GameTest {
         int size = game.getConnectedPlayers().size();
 
         game.addPlayer(new SnakePlayer(new Player("test3","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
 
         Assertions.assertNotEquals(size,game.getConnectedPlayers().size());
     }
@@ -37,7 +38,7 @@ public class GameTest {
         int size = game.getConnectedPlayers().size();
 
         game.addPlayer(new SnakePlayer(new Player("test","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
 
         Assertions.assertEquals(size,game.getConnectedPlayers().size());
     }
@@ -48,7 +49,7 @@ public class GameTest {
         int size = game.getConnectedPlayers().size();
 
         game.removePlayer(new SnakePlayer(new Player("test","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
 
 
         Assertions.assertNotEquals(size,game.getConnectedPlayers().size());
@@ -60,7 +61,7 @@ public class GameTest {
         int size = game.getConnectedPlayers().size();
 
         game.removePlayer(new SnakePlayer(new Player("test3","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
 
 
         Assertions.assertEquals(size,game.getConnectedPlayers().size());
@@ -70,7 +71,7 @@ public class GameTest {
     public void joinGame() {
         int size = game.getConnectedPlayers().size();
         game.addPlayer(new SnakePlayer(new Player("test3","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
         Assertions.assertEquals(size+1, game.getConnectedPlayers().size());
     }
 
@@ -78,7 +79,7 @@ public class GameTest {
     public void joinGameWhenJoined() {
         int size = game.getConnectedPlayers().size();
         game.addPlayer(new SnakePlayer(new Player("test","test"),
-                Arrays.asList(new Location(3,0), new Location(2,0), new Location(1,0), new Location(0,0))));
+                Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0,TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY))));
         Assertions.assertEquals(size, game.getConnectedPlayers().size());
     }
     @Test

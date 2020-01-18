@@ -116,9 +116,9 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
 
         switch (type) {
             case DRAW:
+            case PATHFIND:
                 return gson.fromJson(dtoMessage, SnakePlayer.class);
             case JOIN:
-            case PATHFIND:
                 return new SnakePlayer(playerService.getPlayerByUserName(dtoMessage),
                             Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0, TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY)));
             case GETALLPLAYERS:

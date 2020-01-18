@@ -8,10 +8,12 @@ import java.util.concurrent.Callable;
 public class Algorithm implements Callable<Integer> {
     private List<List<Location>> gameboard;
     private Location startLoc;
+    private Location food;
 
-    public Algorithm(List<List<Location>> gameboard, Location startLoc) {
+    public Algorithm(List<List<Location>> gameboard, Location startLoc, Location food) {
         this.gameboard = gameboard;
         this.startLoc = startLoc;
+        this.food = food;
     }
 
     private int solve(Location loc) {
@@ -19,9 +21,11 @@ public class Algorithm implements Callable<Integer> {
             int counter = 0;
             for (List<Location> locations : gameboard) {
                 for (Location location : locations) {
-                    if (location.getType() == TileType.PATH) counter++;
+                    if (location.getType() == TileType.PATH)
+                        counter++;
                 }
             }
+            return counter;
         }
         return -1;
     }
@@ -40,27 +44,27 @@ public class Algorithm implements Callable<Integer> {
 
 
         //North
-        if (traverse(new Location(loc.getX()-1, loc.getY(), loc.getType()))) {
-            gameboard.get(loc.getY()).get(loc.getX()).setType(TileType.PATH);
+        if (traverse(new Location(loc.getX(), loc.getY()-1, loc.getType()))) {
+            gameboard.get(loc.getY()).set(loc.getX(), new Location(loc.getX(), loc.getY()-1, TileType.PATH));
             return true;
         }
         //East
-        if (traverse(new Location(loc.getX(), loc.getY()-1, loc.getType()))) {
-            gameboard.get(loc.getY()).get(loc.getX()).setType(TileType.PATH);
+        if (traverse(new Location(loc.getX()+1, loc.getY(), loc.getType()))) {
+            gameboard.get(loc.getY()).set(loc.getX(),new Location(loc.getX()+1, loc.getY(), TileType.PATH));
             return true;
         }
         //South
-        if (traverse(new Location(loc.getX()+1, loc.getY(), loc.getType()))) {
-            gameboard.get(loc.getY()).get(loc.getX()).setType(TileType.PATH);
+        if (traverse(new Location(loc.getX(), loc.getY()+1, loc.getType()))) {
+            gameboard.get(loc.getY()).set(loc.getX(),new Location(loc.getX(), loc.getY()+1, TileType.PATH));
             return true;
         }
         //West
-        if (traverse(new Location(loc.getX(), loc.getY()+1, loc.getType()))) {
-            gameboard.get(loc.getY()).get(loc.getX()).setType(TileType.PATH);
+        if (traverse(new Location(loc.getX()-1, loc.getY(), loc.getType()))) {
+            gameboard.get(loc.getY()).set(loc.getX(),new Location(loc.getX()-1, loc.getY(), TileType.PATH));
             return true;
         }
 
-        return false;
+         return false;
     }
 
     private boolean isEnd(Location loc) {
@@ -68,7 +72,9 @@ public class Algorithm implements Callable<Integer> {
     }
 
     private boolean isValid(Location loc) {
-        return inRange(loc) && isOpen(loc) && !isTried(loc);
+        System.out.println(inRange(loc) && !isTried(loc) && isOpen(loc) );
+
+        return inRange(loc) && !isTried(loc) && isOpen(loc);
     }
 
     private boolean inRange(Location loc) {
@@ -86,7 +92,7 @@ public class Algorithm implements Callable<Integer> {
 
 
     private boolean isOpen(Location loc) {
-        return gameboard.get(loc.getY()).get(loc.getX()).getType() == TileType.EMPTY;
+        return gameboard.get(loc.getY()).get(loc.getX()).getType() != TileType.SNAKEBODY;
     }
 
     private boolean isTried(Location loc) {

@@ -1,5 +1,6 @@
 package com.rene.snakebackend.commands;
 
+import com.rene.snakebackend.enums.TileType;
 import com.rene.snakebackend.interfaces.Command;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Algorithm;
@@ -21,7 +22,9 @@ public class PathFind implements Command {
 
         Location snakeHead = ((SnakePlayer) message).getSnake().get(0);
 
-        Algorithm algorithm = new Algorithm(gameboard, snakeHead);
+        snakeHead.setType(TileType.WALKED);
+
+        Algorithm algorithm = new Algorithm(gameboard, snakeHead, game.getFood());
 
         FutureTask<Integer> futureTask = (FutureTask<Integer>) executorService.submit(algorithm);
 
