@@ -1,6 +1,5 @@
 package com.rene.snakebackend.commands;
 
-import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.interfaces.Command;
 import com.rene.snakebackend.interfaces.DTO;
 import com.rene.snakebackend.models.Game;

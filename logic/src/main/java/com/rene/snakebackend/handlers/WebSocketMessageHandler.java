@@ -2,8 +2,6 @@ package com.rene.snakebackend.handlers;
 
 import com.google.gson.Gson;
 import com.rene.snakebackend.commands.*;
-import com.rene.snakebackend.components.GameComponent;
-import com.rene.snakebackend.controllers.GameController;
 import com.rene.snakebackend.enums.GameMessageType;
 import com.rene.snakebackend.enums.LobbyMessageType;
 import com.rene.snakebackend.enums.TileType;
@@ -24,14 +22,9 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
 
     private final EnumMap<GameMessageType, Command> commandHashMap = new EnumMap<>(GameMessageType.class);
     private Gson gson = new Gson();
-    private GameController game;
-
 
     @Setter
     private GameService gameService;
-
-    @Setter
-    private GameComponent component;
 
     @Setter
     private PlayerService playerService;
@@ -41,9 +34,8 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
     }
 
     @Autowired
-    public WebSocketMessageHandler(GameService gameService, GameComponent component, PlayerService playerService) {
+    public WebSocketMessageHandler(GameService gameService, PlayerService playerService) {
         this.gameService = gameService;
-        this.component = component;
         this.playerService = playerService;
         registerCommands();
     }
