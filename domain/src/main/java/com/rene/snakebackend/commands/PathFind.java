@@ -22,7 +22,7 @@ public class PathFind implements Command {
 
         Location snakeHead = ((SnakePlayer) message).getSnake().get(0);
 
-        snakeHead.setType(TileType.WALKED);
+        snakeHead.setType(TileType.EMPTY);
 
         Algorithm algorithm = new Algorithm(gameboard, snakeHead, game.getFood());
 

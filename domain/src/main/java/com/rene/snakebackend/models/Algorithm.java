@@ -17,7 +17,9 @@ public class Algorithm implements Callable<Integer> {
     }
 
     private int solve(Location loc) {
-        if (traverse(loc)) {
+        boolean result = traverse(loc);
+        System.out.println(result);
+        if (result) {
             int counter = 0;
             for (List<Location> locations : gameboard) {
                 for (Location location : locations) {
@@ -50,17 +52,17 @@ public class Algorithm implements Callable<Integer> {
             return true;
         }
         //East
-        if (traverse(new Location(loc.getX()+1, loc.getY(), loc.getType()))) {
+        else if (traverse(new Location(loc.getX()+1, loc.getY(), loc.getType()))) {
             gameboard.get(loc.getY()).set(loc.getX(),new Location(loc.getX()+1, loc.getY(), TileType.PATH));
             return true;
         }
         //South
-        if (traverse(new Location(loc.getX(), loc.getY()+1, loc.getType()))) {
+        else if (traverse(new Location(loc.getX(), loc.getY()+1, loc.getType()))) {
             gameboard.get(loc.getY()).set(loc.getX(),new Location(loc.getX(), loc.getY()+1, TileType.PATH));
             return true;
         }
         //West
-        if (traverse(new Location(loc.getX()-1, loc.getY(), loc.getType()))) {
+        else if (traverse(new Location(loc.getX()-1, loc.getY(), loc.getType()))) {
             gameboard.get(loc.getY()).set(loc.getX(),new Location(loc.getX()-1, loc.getY(), TileType.PATH));
             return true;
         }
@@ -73,8 +75,7 @@ public class Algorithm implements Callable<Integer> {
     }
 
     private boolean isValid(Location loc) {
-//        System.out.println(inRange(loc) && !isTried(loc) && isOpen(loc) );
-        return inRange(loc) && !isTried(loc) && isOpen(loc);
+        return inRange(loc) && !isTried(loc);
     }
 
     private boolean inRange(Location loc) {

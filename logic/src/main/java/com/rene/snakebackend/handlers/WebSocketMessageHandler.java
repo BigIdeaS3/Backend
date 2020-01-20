@@ -62,6 +62,42 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
         throw new UnsupportedOperationException();
     }
 
+    public void register(GameMessageType commandName, Command command) {
+        commandHashMap.put(commandName,command);
+    }
+
+    @Override
+    public WebsocketGameMessage execute(WebsocketGameMessage message, Integer id) {
+
+        GameMessageType commandName = message.getType();
+        Command cmd = commandHashMap.get(commandName);
+        if (cmd == null) throw new IllegalStateException("No command registered for " + commandName);
+        DTO dto = deserializeDTO(message.getType(), message.getMessage().toString());
+        return new WebsocketGameMessage(message.getType(),cmd.execute(gameService.getGame(id), dto));
+    }
+
+    private DTO deserializeDTO(GameMessageType type, String dtoMessage) {
+
+        switch (type) {
+            case DRAW:
+            case PATHFIND:
+            case STARTGAME:
+                return gson.fromJson(dtoMessage, SnakePlayer.class);
+            case JOIN:
+                return new SnakePlayer(playerService.getPlayerByUserName(dtoMessage),
+                            Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0, TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY)));
+            case SETFOOD:
+                return gson.fromJson(dtoMessage, Location.class);
+            case GETALLPLAYERS:
+            case GETFOOD:
+
+                return null;
+        }
+    return null;
+    }
+}
+
+
 //    public WebsocketGameMessage handleGameMessage(int gameId, WebsocketGameMessage msg) {
 //            Game game = gameService.getGame(gameId);
 //            Gson gson =  new Gson();
@@ -89,37 +125,3 @@ public class WebSocketMessageHandler implements com.rene.snakebackend.interfaces
 //        }
 //        throw new UnsupportedOperationException();
 //    }
-
-    public void register(GameMessageType commandName, Command command) {
-        commandHashMap.put(commandName,command);
-    }
-
-    @Override
-    public WebsocketGameMessage execute(WebsocketGameMessage message, Integer id) {
-
-        GameMessageType commandName = message.getType();
-        Command cmd = commandHashMap.get(commandName);
-        if (cmd == null) throw new IllegalStateException("No command registered for " + commandName);
-        DTO dto = deserializeDTO(message.getType(), message.getMessage().toString());
-        return new WebsocketGameMessage(message.getType(),cmd.execute(gameService.getGame(id), dto));
-    }
-
-    private DTO deserializeDTO(GameMessageType type, String dtoMessage) {
-
-        switch (type) {
-            case DRAW:
-            case PATHFIND:
-                return gson.fromJson(dtoMessage, SnakePlayer.class);
-            case JOIN:
-                return new SnakePlayer(playerService.getPlayerByUserName(dtoMessage),
-                            Arrays.asList(new Location(3,0, TileType.SNAKEBODY), new Location(2,0, TileType.SNAKEBODY), new Location(1,0, TileType.SNAKEBODY), new Location(0,0, TileType.SNAKEBODY)));
-            case GETALLPLAYERS:
-            case STARTGAME:
-            case GETFOOD:
-                return null;
-            case SETFOOD:
-                return gson.fromJson(dtoMessage, Location.class);
-        }
-    return null;
-    }
-}
